@@ -27,6 +27,7 @@ import { UserAlbum } from "../../api_client/albums/types";
 import { serverAddress } from "../../api_client/apiClient";
 import { useDownloadPhotosMutation } from "../../api_client/jobs";
 import {
+  useCopyImageToClipboardMutation,
   useMarkPhotosDeletedMutation,
   useSetFavoritePhotosMutation,
   useSetPhotosHiddenMutation,
@@ -70,6 +71,7 @@ export function SelectionActions(props: Readonly<Props>) {
   const createManualStack = useCreateManualStackMutation();
   const mergeStacks = useMergeStacksMutation();
   const removeFromStack = useRemoveFromStackMutation();
+  const copyToClipboard = useCopyImageToClipboardMutation();
 
   const {
     selectedItems,
@@ -360,10 +362,11 @@ export function SelectionActions(props: Readonly<Props>) {
 
           <Menu.Item
             leftSection={<Copy />}
-            disabled={!hasSelection}
+            disabled={!hasSelection || selectAllMode || selectedItems.length > 1}
             onClick={() => {
-              console.log("Pressed my brand new button!")
-              alert("Copy to Clipboard clicked.")
+              copyToClipboard.mutate({
+                
+              });
             }}
           >
             {`  ${t("selectionactions.copytoclipboard")}`}
