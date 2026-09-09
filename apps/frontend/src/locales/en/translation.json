@@ -458,6 +458,7 @@
     "deleted": "Move to trash",
     "makeprivate": "Make Private",
     "download": "Download",
+    "copytoclipboard": "Copy to Clipboard",
     "sharing": "Sharing",
     "sharingdescription": "Open sharing panel for selected photos",
     "albumactions": "Album Actions",

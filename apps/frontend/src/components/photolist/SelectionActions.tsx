@@ -1,6 +1,7 @@
 import { ActionIcon, Group, Menu, Tooltip } from "@mantine/core";
 import {
   IconAlbum as Album,
+  IconCopy as Copy,
   IconDotsVertical as DotsVertical,
   IconDownload as Download,
   IconEye as Eye,
@@ -353,6 +354,19 @@ export function SelectionActions(props: Readonly<Props>) {
 
           <Menu.Item leftSection={<Download />} disabled={!hasSelection} onClick={() => setIsDownloadModalOpen(true)}>
             {`  ${t("selectionactions.download")}`}
+          </Menu.Item>
+
+          <Menu.Divider />
+
+          <Menu.Item
+            leftSection={<Copy />}
+            disabled={!hasSelection}
+            onClick={() => {
+              console.log("Pressed my brand new button!")
+              alert("Copy to Clipboard clicked.")
+            }}
+          >
+            {`  ${t("selectionactions.copytoclipboard")}`}
           </Menu.Item>
 
           <Menu.Divider />
