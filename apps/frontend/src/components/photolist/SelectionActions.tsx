@@ -40,7 +40,7 @@ import {
   useRemoveFromStackMutation,
 } from "../../api_client/stacks";
 import { useAuth } from "../../hooks/useAuth";
-import { copyImageToClipboard } from "../../util/util";
+import { copyToClipboard } from "../../util/util";
 import { ModalDownloadOptions } from "../modals/ModalDownloadOptions";
 
 type Props = {
