@@ -40,7 +40,7 @@ import {
   useRemoveFromStackMutation,
 } from "../../api_client/stacks";
 import { useAuth } from "../../hooks/useAuth";
-import { copyToClipboard } from "../../util/util";
+import { copyImageToClipboard } from "../../util/util";
 import { ModalDownloadOptions } from "../modals/ModalDownloadOptions";
 
 type Props = {
@@ -71,7 +71,7 @@ export function SelectionActions(props: Readonly<Props>) {
   const createManualStack = useCreateManualStackMutation();
   const mergeStacks = useMergeStacksMutation();
   const removeFromStack = useRemoveFromStackMutation();
-  const copyToClipboard = useCopyImageToClipboardMutation();
+  const copyImageToClipboard = useCopyImageToClipboardMutation();
 
   const {
     selectedItems,
@@ -364,9 +364,10 @@ export function SelectionActions(props: Readonly<Props>) {
             leftSection={<Copy />}
             disabled={!hasSelection || selectAllMode || selectedItems.length > 1}
             onClick={() => {
-              copyToClipboard.mutate({
-                
-              });
+              const photo = selectedItems[0];
+              if (photo?.url) {
+                copyImageToClipboard.mutate(`${serverAddress}/media/square_thumbnails/${photo.url.split(";")[0]}`);
+              }
             }}
           >
             {`  ${t("selectionactions.copytoclipboard")}`}

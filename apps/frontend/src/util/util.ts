@@ -20,6 +20,24 @@ export const copyToClipboard = (str: string) => {
   }
 };
 
+export async function copyImageToClipboard(imageUrl: string): Promise<void> {
+  const response = await fetch(imageUrl, { credentials: "include" });
+  if (!response.ok) throw new Error(`Failed to fetch image: ${response.status}`);
+  const jpegBlob = await response.blob();
+
+  const bitmap = await createImageBitmap(jpegBlob);
+  const canvas = document.createElement("canvas");
+  canvas.width = bitmap.width;
+  canvas.height = bitmap.height;
+  canvas.getContext("2d")!.drawImage(bitmap, 0, 0);
+
+  const pngBlob = await new Promise<Blob>((resolve, reject) => {
+    canvas.toBlob(blob => (blob ? resolve(blob) : reject(new Error("Canvas conversion failed"))), "image/png");
+  });
+
+  await navigator.clipboard.write([new ClipboardItem({ "image/png": pngBlob })]);
+}
+
 // TODO: Add ordinal suffix to day of month when implemented in luxon (NB, is it still valid?)
 export function formatDateForPhotoGroups(photoGroups: DatePhotosGroup[]): DatePhotosGroup[] {
   return photoGroups.map(photoGroup => {

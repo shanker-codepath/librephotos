@@ -459,6 +459,7 @@
     "makeprivate": "Make Private",
     "download": "Download",
     "copytoclipboard": "Copy to Clipboard",
+    "copytoclipboardfailed": "Couldn't copy the photo — try again",
     "sharing": "Sharing",
     "sharingdescription": "Open sharing panel for selected photos",
     "albumactions": "Album Actions",
